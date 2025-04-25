@@ -46,10 +46,11 @@ Example:
   <mimeMap fileExtension=".css" mimeType="text/css" />
   <mimeMap fileExtension=".js" mimeType="application/javascript" />
 </staticContent>
-2. Set Permissions:
+```
+#### 2. Set Permissions:
 Ensure that IIS has read permissions on the static files located in the wwwroot directory. The App Pool Identity (the IIS user) should have the necessary permissions to access the files and serve them to the client.
 
-3. Application Pool Configuration:
+#### 3. Application Pool Configuration:
 The application pool in IIS must be set to use the .NET Framework 4.x version for compatibility with the ASP.NET MVC (non-core) application. This ensures that the application runs correctly and IIS processes requests using the appropriate runtime version.
 
 Steps to Set Up and Resolve 403 Forbidden Error
@@ -68,10 +69,9 @@ Step 1: Set Permissions for Static Files
 - Click Apply and OK.
 
 Step 2: Ensure Correct MIME Types in web.config
-In the web.config, ensure that static content is properly configured to be served by IIS. For example, add MIME types for file extensions like .jpg, .css, and .js:
+- In the web.config, ensure that static content is properly configured to be served by IIS. For example, add MIME types for file extensions like .jpg, .css, and .js:
 
-xml
-Copy
+```xml
 <staticContent>
   <mimeMap fileExtension=".jpg" mimeType="image/jpeg" />
   <mimeMap fileExtension=".jpeg" mimeType="image/jpeg" />
@@ -80,36 +80,36 @@ Copy
   <mimeMap fileExtension=".js" mimeType="application/javascript" />
   <mimeMap fileExtension=".ico" mimeType="image/x-icon" />
 </staticContent>
+```
 
-Step 3: Verify Application Pool Settings in IIS
-Open IIS Manager.
+#### Step 3: Verify Application Pool Settings in IIS
+- Open IIS Manager.
 
-Navigate to your application and select the Application Pool it is using.
+- Navigate to your application and select the Application Pool it is using.
 
-Right-click on the application pool and select Edit Application Pool.
+- Right-click on the application pool and select Edit Application Pool.
 
-Ensure that the .NET Framework version is set to .NET Framework 4.x (or the version your application is using).
+- Ensure that the .NET Framework version is set to .NET Framework 4.x (or the version your application is using).
 
-Ensure the Managed Pipeline Mode is set to Integrated.
+- Ensure the Managed Pipeline Mode is set to Integrated.
 
-Click OK to apply the changes.
-
-
-Step 4: Check IIS Handler Mappings
-In IIS Manager, select your site.
-
-In the Features View, double-click on Handler Mappings.
-
-Ensure that the correct handlers are mapped for ASP.NET and static files.
-
-Ensure that the StaticFile handler is present, which handles requests for static files like .css, .jpg, .js, etc.
+- Click OK to apply the changes.
 
 
-Step 5: Configure Web.config for Static Files
-Ensure that your web.config is set up correctly for static content, as shown below:
+#### Step 4: Check IIS Handler Mappings
+- In IIS Manager, select your site.
 
-xml
-Copy
+- In the Features View, double-click on Handler Mappings.
+
+- Ensure that the correct handlers are mapped for ASP.NET and static files.
+
+- Ensure that the StaticFile handler is present, which handles requests for static files like .css, .jpg, .js, etc.
+
+
+#### Step 5: Configure Web.config for Static Files
+- Ensure that your web.config is set up correctly for static content, as shown below:
+
+``` xml
 <system.webServer>
   <!-- Static Content Handling -->
   <staticContent>
@@ -126,11 +126,11 @@ Copy
     <add name="ASP.NET" path="*.aspx" verb="*" type="System.Web.HttpForbiddenHandler" resourceType="Unspecified" />
   </handlers>
 </system.webServer>
+```
 
+#### Step 6: Test and Verify
+- Once the above steps are completed, restart your IIS server.
 
-Step 6: Test and Verify
-Once the above steps are completed, restart your IIS server.
+- Try accessing the application again and check if the 403 Forbidden error is resolved.
 
-Try accessing the application again and check if the 403 Forbidden error is resolved.
-
-If the issue persists, double-check the permissions and ensure the application pool identity has access to all required directories and files.
+- If the issue persists, double-check the permissions and ensure the application pool identity has access to all required directories and files.
