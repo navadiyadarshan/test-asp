@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <div id="image-container" style="display: flex; justify-content: space-around; margin-top: 20px;"></div>
+
+    <!-- JavaScript to dynamically create images -->
+    <script>
+        // Array of image file names
+        const imagePaths = [
+            "/images/HTML.png_Img.png",
+            "/images/HTML.png_Img.png",
+            "/images/HTML.png_Img.png",
+        ];
+
+        // Get the container where images will be added
+        const imageContainer = document.getElementById("image-container");
+
+        // Loop through each image path and create an <img> tag dynamically
+        imagePaths.forEach(imagePath => {
+            const img = document.createElement("img");
+            img.src = imagePath;
+            img.alt = "Dynamically generated image";
+            img.style.width = "300px"; // Optional: Resize images
+            img.style.margin = "10px"; // Optional: Add spacing between images
+            imageContainer.appendChild(img); // Append the image to the container
+        });
+    </script>
+</div>

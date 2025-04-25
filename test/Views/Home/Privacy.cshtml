@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+<div id="image-container" style="display: flex; justify-content: space-around; margin-top: 20px;"></div>
+
+    <!-- JavaScript to dynamically create images -->
+    <script>
+        // Array of image file names
+        const imagePaths = [
+            "/images/HTML.png",
+            "/images/HTML.png",
+            "/images/HTML.png",
+        ];
+
+        // Get the container where images will be added
+        const imageContainer = document.getElementById("image-container");
+
+        // Loop through each image path and create an <img> tag dynamically
+        imagePaths.forEach(imagePath => {
+            const img = document.createElement("img");
+            img.src = imagePath;
+            img.alt = "Dynamically generated image";
+            img.style.width = "300px"; // Optional: Resize images
+            img.style.margin = "10px"; // Optional: Add spacing between images
+            imageContainer.appendChild(img); // Append the image to the container
+        });
+    </script>
+
+<p>Use this page to detail your site's privacy policy.</p>
